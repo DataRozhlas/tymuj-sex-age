@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- libs -->
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+
+<!-- links -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text">
+<link href="https://fonts.googleapis.com/css2?family=Asap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+
+<link rel="stylesheet" href="./style.css" />
+<link rel="stylesheet" href="./highcharts-style.css" />
+
+<!-- html -->
+<div id="vis-stacked-bar"></div>
+<script>
+var colors = {
+  'default': '#aaa',
+  '2020': '#e63946',
+  '2018': '#009FB8',
+  '2019': '#3E80B6',
+  'avg' : '#e63946',
+  'avg' : '#333',
+  'uhrn-highlight': '#30638e'
+}
+
+Highcharts.setOptions({
+    lang: {
+      months: ['ledna', 'února', 'března', 'dubna', 'května', 'června', 'července', 'srpna', 'září', 'října', 'listopadu', 'prosince'],
+      shortMonths: ['leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'],
+      // shortMonths: ['led', 'úno', 'bře', 'dub', 'kvě', 'čen', 'čec', 'srp', 'zář', 'říj', 'lis', 'pro'],
+      decimalPoint: ',',
+      numericSymbols: [' tis.', ' mil.', 'mld.', 'T', 'P', 'E'],
+      rangeSelectorFrom: 'od',
+      rangeSelectorTo: 'do',
+      rangeSelectorZoom: 'vyberte období:',
+    },
+  });
+
+</script>
+<script type="text/javascript" src="./stacked-bar-chart.js"></script>
