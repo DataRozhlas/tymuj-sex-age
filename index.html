@@ -5,6 +5,7 @@
 
 <!-- libs -->
 <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="./tymuj_sex_vek.js"></script>
 
 <!-- links -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text">
@@ -15,7 +16,13 @@
 <link rel="stylesheet" href="./highcharts-style.css" />
 
 <!-- html -->
-<div id="vis-stacked-bar"></div>
+<!-- <div id=""></div> -->
+<div style="max-width: 100%; overflow: hidden; display: block;">
+  <div class="chart small" id="vis-stacked-bar-muzi"></div>
+  <div class="chart small" id="vis-stacked-bar-zeny"></div>
+</div>
+
+
 <script>
 var colors = {
   'default': '#aaa',
@@ -40,5 +47,8 @@ Highcharts.setOptions({
     },
   });
 
+  console.log(sex_vek.map(a => a.muzi_total))
+
 </script>
-<script type="text/javascript" src="./stacked-bar-chart.js"></script>
+<script type="text/javascript" src="./stacked-bar-chart-muzi.js"></script>
+<script type="text/javascript" src="./stacked-bar-chart-zeny.js"></script>
