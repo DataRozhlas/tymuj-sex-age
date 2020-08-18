@@ -14,17 +14,25 @@ console.log(axisWidth, chartWidth, chartWidth.item(0))
 let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   chart: {
       type: 'bar',
-      // width: chartWidth, 
-      height: 800 // comment out if not necessary
+      // width: visContainerWidth/2, 
+      height: 600, // comment out if not necessary
+      
+      events: {
+        load() {
+          setSamePlotSize(this);
+        },
+      },
   },
-  title: {
-      text: 'Stacked Bar Chart Multiple Categories', 
-      useHTML: true,
-  },
-  subtitle: {
-      useHTML: true,
-      text: 'Většina Čechů říká, že třídí odpadky, omezit konzumaci masa se ale chce jen málokomu' + '<br><span style="color: #fff">.</span>'
-  },
+  title: false,
+  // {
+  //     text: 'Stacked Bar Chart Multiple Categories', 
+  //     useHTML: true,
+  // },
+  subtitle: false,
+  //  {
+  //     useHTML: true,
+  //     text: 'Většina Čechů říká, že třídí odpadky, omezit konzumaci masa se ale chce jen málokomu' + '<br><span style="color: #fff">.</span>'
+  // },
   credits: {
     href : '',
     text : 'Zdroj: třeba doplnit'
@@ -60,7 +68,9 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
       enabled: false
   },
   legend: {
-    reversed: true  
+    reversed: true,
+    layout: 'vertical',
+
   },
   plotOptions: {
       bar: {
@@ -78,30 +88,35 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   {
     name: '50 a vic',
     data : sex_vek.map(a => a.muzi_nad_50),
-    // color: colors['2020']
+      color: colors['blue-5']
+      // color: colors['2020']
   },
   {
     name: '40-49',
     data : sex_vek.map(a => a.muzi_40_49),
-    // color: colors['2020']
+      color: colors['blue-4']
+      // color: colors['2020']
   },
   {
     name: '30-39',
     data : sex_vek.map(a => a.muzi_30_39),
-    color: colors['2020']
+      color: colors['blue-3']
+      // color: colors['2020']
   },
   {
     name: '20-29',
     data : sex_vek.map(a => a.muzi_20_29),
+    color: colors['blue-2']
 
-    color: colors['2019']
+    // color: colors['2019']
     
   },
   {
     name: 'Pod 20',
     data : sex_vek.map(a => a.muzi_pod_20),
+    color: colors['blue-1']
 
-    color: colors['2018']
+    // color: colors['2018']
   },
 ]
 });

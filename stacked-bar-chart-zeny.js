@@ -6,17 +6,25 @@
 let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
   chart: {
       type: 'bar',
-      // width: chartWidth, 
-      height: 800 // comment out if not necessary
+      // width: singlePlotWidth, 
+      // height: 800, // comment out if not necessary
+      events: {
+        load() {
+          fixOffset(this);
+        },
+      },
   },
-  title: {
-      // text: 'Stacked Bar Chart Multiple Categories', 
-      useHTML: true,
-  },
-  subtitle: {
-      useHTML: true,
-      // text: 'Většina Čechů říká, že třídí odpadky, omezit konzumaci masa se ale chce jen málokomu' + '<br><span style="color: #fff">.</span>'
-  },
+  title: false,
+  // title: {
+  //     enabled: false,
+  //     text: 'Stacked  Categories', 
+  //     useHTML: true,
+  // },
+  subtitle: false,
+  // {
+  //     useHTML: true,
+  //     text: 'Většina Čechů říká, že třídí '
+  // },
   credits: {
     href : '',
     text : 'Zdroj: třeba doplnit'
@@ -54,7 +62,9 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
       enabled: false
   },
   legend: {
-    reversed: true  
+    reversed: true,
+    layout: 'vertical',
+    // floating: true
   },
   plotOptions: {
       bar: {
@@ -64,7 +74,8 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
           enableMouseTracking: true,
           pointPadding: 0.1,
           groupPadding: 0.15,
-          borderWidth: 0,
+          borderWidth: 0.5,
+          // borderColor: '#fff',
           stacking: 'normal'
       }
   },
@@ -72,51 +83,56 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
     {
       name: '50 a vic',
       data : sex_vek.map(a => a.zeny_nad_50),
-      // color: colors['2020']
+      // color: colors['red-1']
+      color: colors['red-5']
     },
     {
       name: '40-49',
       data : sex_vek.map(a => a.zeny_40_49),
-      // color: colors['2020']
+      color: colors['red-4']
+      // color: colors['red-2']
     },
     {
       name: '30-39',
       data : sex_vek.map(a => a.zeny_30_39),
-      color: colors['2020']
+      color: colors['red-3']
     },
     {
       name: '20-29',
       data : sex_vek.map(a => a.zeny_20_29),
   
-      color: colors['2019']
+      color: colors['red-2']
+      // color: colors['red-4']
       
     },
     {
       name: 'Pod 20',
       data : sex_vek.map(a => a.zeny_pod_20),
   
-      color: colors['2018']
+      color: colors['red-1']
+      // color: colors['red-5']
     },
 ]
 });
 
-let axis_width = axisWidth.item(0).getBoundingClientRect().width
-console.log(axis_width, chartWidth, chartWidth.item(0).width.baseVal.value)
-let chart_width = document.getElementById("vis-stacked-bar-muzi").offsetWidth
-let plot_width = (2 * chartWidth - axis_width) / 2
+// let axis_width = axisWidth.item(0).getBoundingClientRect().width
+// console.log(axis_width, chartWidth, chartWidth.item(0).width.baseVal.value)
+// let chart_width = document.getElementById("vis-stacked-bar-muzi").offsetWidth
+// let plot_width = (2 * chartWidth - axis_width) / 2
 
-document.getElementById('vis-stacked-bar-muzi').setAttribute('style', 'max-width: 500px; height: 500px') // .setAttribute('style', 'height: 500px')
-document.getElementById('vis-stacked-bar-zeny').setAttribute('style', 'max-width: 200px') //.setAttribute('style', 'height: 500px')
-muzi_chart.update({
-  chart: {
-    // height: 900,
-    width: 500, // plot_width + axis_width
-  }
-})
+// document.getElementById('vis-stacked-bar-muzi').setAttribute('style', 'max-width: 500px; height: 500px') // .setAttribute('style', 'height: 500px')
+// document.getElementById('vis-stacked-bar-zeny').setAttribute('style', 'max-width: 200px') //.setAttribute('style', 'height: 500px')
+// muzi_chart.update({
+//   chart: {
+//     // height: 900,
+//     width: 500, // plot_width + axis_width
+//   }
+// })
 
-zeny_chart.update({
-  chart: {
-    // x: 500,
-    width: 200
-  }
-})
+// zeny_chart.update({
+//   chart: {
+//     // x: 500,
+//     width: 400,
+//     height: 500
+//   }
+// })
