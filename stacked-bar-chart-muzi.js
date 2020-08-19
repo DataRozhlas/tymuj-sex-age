@@ -33,10 +33,11 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   //     useHTML: true,
   //     text: 'Většina Čechů říká, že třídí odpadky, omezit konzumaci masa se ale chce jen málokomu' + '<br><span style="color: #fff">.</span>'
   // },
-  credits: {
-    href : '',
-    text : 'Zdroj: třeba doplnit'
-  },
+  credits: false,
+  //  {
+  //   href : '',
+  //   text : 'Zdroj: třeba doplnit'
+  // },
   xAxis: {
       categories:  sex_vek.map(a => a.sport_nazev), 
       // categories: ['třídím odpadky', 'šetřím vodou (sprchování, mytí nádobí..)', 'omezuji igelitky', 'vyhýbám se nadbytečným obalům', 'kupuji lokální potraviny', 'nosím si vlastní láhev na vodu', 'celkově omezuji spotřebu', 'nekupuji balenou vodu', 'nakupuji věci z druhé ruky', 'jezdím MHD místo autem', 'nelétám letadlem', 'používám přírodní kosmetiku', 'vzdělávám se o ekologii', 'podepisuji petice', 'snižuji konzumaci masa', 'chodím na demonstrace za klima']
@@ -79,7 +80,7 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
           },
           enableMouseTracking: true,
           pointPadding: 0.1,
-          groupPadding: 0.15,
+          groupPadding: 0.0,
           borderWidth: 0,
           stacking: 'normal'
       }
@@ -88,25 +89,25 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   {
     name: '50 a vic',
     data : sex_vek.map(a => a.muzi_nad_50),
-      color: colors['blue-5']
+      color: colors['muzi-5']
       // color: colors['2020']
   },
   {
     name: '40-49',
     data : sex_vek.map(a => a.muzi_40_49),
-      color: colors['blue-4']
+      color: colors['muzi-4']
       // color: colors['2020']
   },
   {
     name: '30-39',
     data : sex_vek.map(a => a.muzi_30_39),
-      color: colors['blue-3']
+      color: colors['muzi-3']
       // color: colors['2020']
   },
   {
     name: '20-29',
     data : sex_vek.map(a => a.muzi_20_29),
-    color: colors['blue-2']
+    color: colors['muzi-2']
 
     // color: colors['2019']
     
@@ -114,7 +115,7 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   {
     name: 'Pod 20',
     data : sex_vek.map(a => a.muzi_pod_20),
-    color: colors['blue-1']
+    color: colors['muzi-1']
 
     // color: colors['2018']
   },

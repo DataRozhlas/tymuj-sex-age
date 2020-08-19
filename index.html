@@ -6,6 +6,8 @@
 <!-- libs -->
 <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
 <script type="text/javascript" src="./tymuj_sex_vek.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
 
 <!-- links -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text">
@@ -14,6 +16,8 @@
 
 <link rel="stylesheet" href="./style.css" />
 <link rel="stylesheet" href="./highcharts-style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" />
+
 
 <!-- html -->
 <!-- <div id=""></div> -->
@@ -23,6 +27,15 @@
   <div class="chart small" id="vis-stacked-bar-muzi"></div>
   <div class="chart small" id="vis-stacked-bar-zeny"></div>
 </div>
+<select id="sport_sel"></select> 
+<div id="single-sport" style="max-width: 100%; overflow: hidden; display: block;">
+  <div class="chart small" id="vis-single-sport-muzi"></div>
+  <div class="chart small" id="vis-single-sport-zeny"></div>
+</div>
+  <div class="highcharts-credits asap">
+    <a href="https://tymuj.cz/"  style="display: inline-block; font-size: 12px;cursor:pointer;color:#999999;fill:#999999;float:right">Zdroj dat: Týmuj.cz</a>
+  </div>
+<!--  name="" -->
 
 
 <script>
@@ -34,18 +47,18 @@ var colors = {
   'avg' : '#e63946',
   'avg' : '#333',
   'uhrn-highlight': '#30638e',
-  'blue-1' : '#28377E',
-  'blue-2' : '#008AB8',
-  'blue-3' : '#2DB59E',
-  'blue-4' : '#A8E0B2',
-  'blue-5' : '#D7F2B6',
-  'red-1' : '#BB1B30',
-  'red-2' : '#E63946',
-  'red-3' : '#F57653',
-  'red-4' : '#FDAB5E',
-  'red-5' : '#FFD080',
-  'red-6' : '#FEDD80',
-  'red-7' : '#FCF6B4',
+  'muzi-1' : '#28377E',
+  'muzi-2' : '#008AB8',
+  'muzi-3' : '#2DB59E',
+  'muzi-4' : '#A8E0B2',
+  'muzi-5' : '#D7F2B6',
+  'zeny-1' : '#BB1B30',
+  'zeny-2' : '#E63946',
+  'zeny-3' : '#F57653',
+  'zeny-4' : '#FDAB5E',
+  'zeny-5' : '#FFD080',
+  'zeny-6' : '#FEDD80',
+  'zeny-7' : '#FCF6B4',
   // 'red-1' : '#BB1B30',
   // 'red-2' : '#E63946',
   // 'red-3' : '#F45048',
@@ -81,6 +94,8 @@ Highcharts.setOptions({
     singlePlotHeight = e.plotHeight;
     const plotBack = document.getElementById(e.renderTo.id).getElementsByClassName('highcharts-plot-background')[0];
     plotY = plotBack.y.baseVal.value
+
+    document.getElementById('single-sport').style['margin-left'] = `${plotX-20}px`
 
     // let axis_width = axisWidth.item(0).getBoundingClientRect().width
 
@@ -180,8 +195,56 @@ Highcharts.setOptions({
       e.reflow();
     }
 
-}
 
+  }
+  function mtch(params, data) {
+	if (data.text.split(' (')[0].toLowerCase().indexOf(params.term.toLowerCase()) > -1) {
+      return data
+    }
+	return null
+}
+  
+// fetch(host + 'tools/mapa.json')
+//   .then(response => response.json())
+//   .then(data => {
+let selCont = `<option></option>`
+// data.forEach(rec => {
+sex_vek.forEach(rec => {
+  // selCont += `<option value="${rec[5]}">${rec[0]} (${rec[1]})</option>`
+  selCont += `<option value="${rec[5]}">${rec.sport_nazev}</option>`
+})
+document.getElementById('sport_sel').innerHTML = selCont
+
+$(document).ready(function() {
+  const sl = $('#sport_sel').select2({
+    minimumInputLength: 1,
+    placeholder: 'Vyberte sport, třeba krasobruslení ',
+      allowClear: true,
+    matcher: mtch,
+    width: '95%',
+    language: {
+      inputTooShort: function () {
+          return "Napište aspoň 1 znak...";
+        }
+    }
+  })
+
+  sl.on('change', function(e) {
+    const selected = $('#sport_sel').select2('data')[0].text
+    console.log('selected', selected)
+    drawSingleSport(selected, 'zeny')
+    drawSingleSport(selected, 'muzi')
+  // 	draw('vsechny', data.find(e => e[5] == selected))
+
+  // 	// gacka
+  // 	if (typeof ga === 'function') {
+  // 		ga('gtm1.send', 'event', 'vizualizace', 'graf', 'select_obce')
+  // 		}
+  // })
+})
+
+})
 </script>
 <script type="text/javascript" src="./stacked-bar-chart-muzi.js"></script>
 <script type="text/javascript" src="./stacked-bar-chart-zeny.js"></script>
+<script type="text/javascript" src="./stacked-bar-single-sport.js"></script>

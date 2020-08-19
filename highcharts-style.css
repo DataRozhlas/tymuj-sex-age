@@ -8,6 +8,14 @@ p {
   font-family: "Noticia text" !important;
 }
 
+.noticia {
+  font-family: "Noticia text" !important;
+}
+
+.asap {
+  font-family: "Asap" !important;
+}
+
 a {
   color: #666;
   fill: #666;

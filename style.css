@@ -10,3 +10,10 @@
   margin: 1em auto;
   float: left;
 } 
+
+.select2-dropdown li {
+  background-image: none !important;
+ }
+ #sport_sel {
+   width: 95%;
+ }
