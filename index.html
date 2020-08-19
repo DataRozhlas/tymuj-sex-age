@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- libs -->
 <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
@@ -10,241 +9,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
 
 <!-- links -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text">
-<link href="https://fonts.googleapis.com/css2?family=Asap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text" />
+<link href="https://fonts.googleapis.com/css2?family=Asap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet" />
 
 <link rel="stylesheet" href="./style.css" />
 <link rel="stylesheet" href="./highcharts-style.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" />
 
-
 <!-- html -->
-<!-- <div id=""></div> -->
-<div id="horizontal-layout" style="max-width: 100%; overflow: hidden; display: block;">
+<div id="horizontal-layout" class="horizontal-layout-container">
   <div class="highcharts-title">Jak moc sportují muži a ženy?</div>
-  <div class="highcharts-subtitle">Já jsem netriviálně dlouhý podnadpis</div>
+  <div class="highcharts-subtitle" style="margin-bottom: 15px">Já jsem netriviálně dlouhý podnadpis</div>
+  <div id="muzi-title" class="asap subchart-title ">Muži</div>
+  <div id="zeny-title" class="asap subchart-title">Ženy</div>
   <div class="chart small" id="vis-stacked-bar-muzi"></div>
   <div class="chart small" id="vis-stacked-bar-zeny"></div>
 </div>
-<select id="sport_sel"></select> 
-<div id="single-sport" style="max-width: 100%; overflow: hidden; display: block;">
+<div class="noticia" style="font-weight: bold;">
+  Podívejte se, jak to mají další sporty
+</div>
+<select id="sport_sel"></select>
+<div id="single-sport" class="horizontal-layout-container">
+  <div class="chart small highcharts-axis-labels asap" id="selected-sport-label"></div>
   <div class="chart small" id="vis-single-sport-muzi"></div>
   <div class="chart small" id="vis-single-sport-zeny"></div>
 </div>
-  <div class="highcharts-credits asap">
-    <a href="https://tymuj.cz/"  style="display: inline-block; font-size: 12px;cursor:pointer;color:#999999;fill:#999999;float:right">Zdroj dat: Týmuj.cz</a>
-  </div>
-<!--  name="" -->
+<div class="highcharts-credits asap zdroj-dat">
+  <a style="float: right" href="https://tymuj.cz/">Zdroj dat: Týmuj.cz</a>
+</div>
 
-
-<script>
-var colors = {
-  'default': '#aaa',
-  '2020': '#e63946',
-  '2018': '#009FB8',
-  '2019': '#3E80B6',
-  'avg' : '#e63946',
-  'avg' : '#333',
-  'uhrn-highlight': '#30638e',
-  'muzi-1' : '#28377E',
-  'muzi-2' : '#008AB8',
-  'muzi-3' : '#2DB59E',
-  'muzi-4' : '#A8E0B2',
-  'muzi-5' : '#D7F2B6',
-  'zeny-1' : '#BB1B30',
-  'zeny-2' : '#E63946',
-  'zeny-3' : '#F57653',
-  'zeny-4' : '#FDAB5E',
-  'zeny-5' : '#FFD080',
-  'zeny-6' : '#FEDD80',
-  'zeny-7' : '#FCF6B4',
-  // 'red-1' : '#BB1B30',
-  // 'red-2' : '#E63946',
-  // 'red-3' : '#F45048',
-  // 'red-4' : '#F77F50',
-  // 'red-5' : '#FDAB5E',
-  // 'red-6' : '#FEDD80',
-  // 'red-7' : '#FCF6B4',
-}
-
-Highcharts.setOptions({
-    lang: {
-      months: ['ledna', 'února', 'března', 'dubna', 'května', 'června', 'července', 'srpna', 'září', 'října', 'listopadu', 'prosince'],
-      shortMonths: ['leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'],
-      // shortMonths: ['led', 'úno', 'bře', 'dub', 'kvě', 'čen', 'čec', 'srp', 'zář', 'říj', 'lis', 'pro'],
-      decimalPoint: ',',
-      numericSymbols: [' tis.', ' mil.', 'mld.', 'T', 'P', 'E'],
-      rangeSelectorFrom: 'od',
-      rangeSelectorTo: 'do',
-      rangeSelectorZoom: 'vyberte období:',
-    },
-  });
-
-  const visContainerWidth = document.getElementById('horizontal-layout').offsetWidth;
-  let singlePlotWidth;
-  let plotX;
-  let plotY;
-  let singlePlotHeight;
-
-  function setSamePlotSize(e) {
-    console.log(e, e.chartWidth, e.plotLeft)
-    plotX = e.plotLeft;
-    plotY = e.plotTop;
-    singlePlotHeight = e.plotHeight;
-    const plotBack = document.getElementById(e.renderTo.id).getElementsByClassName('highcharts-plot-background')[0];
-    plotY = plotBack.y.baseVal.value
-
-    document.getElementById('single-sport').style['margin-left'] = `${plotX-20}px`
-
-    // let axis_width = axisWidth.item(0).getBoundingClientRect().width
-
-    // console.log(document.getElementById(e.renderTo.id).width)
-    // // console.log(document.getElementById(e.renderTo.id))
-    // let chart_width = document.getElementById(e.renderTo.id).offsetWidth
-    
-    console.log('container width:', visContainerWidth)
-    // singlePlotWidth = (visContainerWidth - axis_width - 80) / 2
-    singlePlotWidth = Math.floor((visContainerWidth - e.plotLeft - 50) / 2)
-    console.log('BEFORE (muzi), chart width:',e.chartWidth, 'plotLeft:', e.plotLeft)
-    console.log('single plot width:', singlePlotWidth)
-
-    let diff = singlePlotWidth - plotBack.width.baseVal.value;
-    while (diff !== 0) {
-      document.getElementById(e.renderTo.id).style['width']= `${e.chartWidth + diff}px`;
-      // document.getElementById(e.renderTo.id).style['width']= `${singlePlotWidth + e.plotLeft}px`;
-      e.reflow();
-      let newPlotW = document.getElementById(e.renderTo.id).getElementsByClassName('highcharts-plot-background')[0].width.baseVal.value;
-      // console.log(plotBack.width.baseVal.value, newPlotW)
-      diff = singlePlotWidth - newPlotW;
-      // e.update();
-    }
-
-    let lastPlotW = document.getElementById(e.renderTo.id).getElementsByClassName('highcharts-plot-background')[0].width.baseVal.value;
-    console.log('AFTER (muzi), chart width:',e.chartWidth, 'plot width:', lastPlotW)
-    // console.log('after',e.chartWidth, plotBack.width.baseVal.value)
-  }
-
-
-
-  let plot_width = 100;
-
-  /*
-  function setSamePlotSize(e) {
-    console.log(e)
-    const plotBack = document.getElementById(e.renderTo.id).getElementsByClassName('highcharts-plot-background')[0];
-    
-    let axis_width = axisWidth.item(0).getBoundingClientRect().width
-    let chart_width = document.getElementById(e.renderTo.id).offsetWidth
-    console.log(axis_width, chart_width)
-    plot_width = (2 * chart_width - axis_width) / 2
-    let first_chart_width = axis_width + plot_width;
-
-    // const shouldBeHeight = (plotBack.width.baseVal.value / 4) * 3;
-    // const shouldBeHeight = (plotBack.width.baseVal.value / 4) * 9;
-    // const heightDiff = shouldBeHeight - plotBack.height.baseVal.value;
-    console.log('first', first_chart_width)
-    // if (heightDiff !== 0) {
-      document.getElementById(e.renderTo.id).style.width = `${first_chart_width}px` //`${e.chartWeight + heightDiff}px`;
-      // document.getElementById(e.renderTo.id).style.height = `${e.chartHeight + heightDiff}px`;
-      e.reflow();
-      // e.update();
-    // }
-
-    // console.log('plot bckground', document.getElementById(e.renderTo.id).getElementsByClassName('highcharts-plot-background')[0])
-    // console.log('plot bckground', document.getElementById(e.renderTo.id).getElementsByClassName('highcharts-plot-background')[0])
-  }*/
-
-  function fixOffset(e) {
-    // console.log(e)
-    let pBack = document.getElementById(e.renderTo.id).getElementsByClassName('highcharts-plot-background')[0];
-    let pBackW = pBack.width.baseVal.value;
-
-    let diff = singlePlotWidth - pBackW
-    
-    // console.log(pBackW, singlePlotWidth)
-    console.log('diff', diff, e.chartWidth, singlePlotWidth, e.chartWidth + diff)
-
-    let plotHeight = e.plotHeight;
-    let hDiff = singlePlotHeight - plotHeight;
-
-    // let plotYDiff = e.plotTop - plotY
-    // console.log('y', e.plotTop, plotY, plotYDiff)
-
-    if (diff !== 0) {
-      // c  onsole.log('im in')
-      document.getElementById(e.renderTo.id).style['width']= `${e.chartWidth + diff}px`;
-      document.getElementById(e.renderTo.id).style['height']= `${e.chartHeight + hDiff}px`;
-      e.reflow();
-    }
-    // console log
-    let lastPlotW = document.getElementById(e.renderTo.id).getElementsByClassName('highcharts-plot-background')[0].width.baseVal.value;
-    console.log('AFTER (zeny), chart width:',e.chartWidth, 'plot width:', lastPlotW)
-  }
-
-  function onChartLoad(e) {
-    console.log(e)
-    const plotBack = document.getElementById(e.renderTo.id).getElementsByClassName('highcharts-plot-background')[0];
-    console.log(plotBack)
-    // const shouldBeHeight = (plotBack.width.baseVal.value / 4) * 3;
-    const shouldBeHeight = (plotBack.width.baseVal.value / 4) * 9;
-    const heightDiff = shouldBeHeight - plotBack.height.baseVal.value;
-    console.log(heightDiff)
-    if (heightDiff !== 0) {
-      document.getElementById(e.renderTo.id).style.height = `${e.chartHeight + heightDiff}px`;
-      e.reflow();
-    }
-
-
-  }
-  function mtch(params, data) {
-	if (data.text.split(' (')[0].toLowerCase().indexOf(params.term.toLowerCase()) > -1) {
-      return data
-    }
-	return null
-}
-  
-// fetch(host + 'tools/mapa.json')
-//   .then(response => response.json())
-//   .then(data => {
-let selCont = `<option></option>`
-// data.forEach(rec => {
-sex_vek.forEach(rec => {
-  // selCont += `<option value="${rec[5]}">${rec[0]} (${rec[1]})</option>`
-  selCont += `<option value="${rec[5]}">${rec.sport_nazev}</option>`
-})
-document.getElementById('sport_sel').innerHTML = selCont
-
-$(document).ready(function() {
-  const sl = $('#sport_sel').select2({
-    minimumInputLength: 1,
-    placeholder: 'Vyberte sport, třeba krasobruslení ',
-      allowClear: true,
-    matcher: mtch,
-    width: '95%',
-    language: {
-      inputTooShort: function () {
-          return "Napište aspoň 1 znak...";
-        }
-    }
-  })
-
-  sl.on('change', function(e) {
-    const selected = $('#sport_sel').select2('data')[0].text
-    console.log('selected', selected)
-    drawSingleSport(selected, 'zeny')
-    drawSingleSport(selected, 'muzi')
-  // 	draw('vsechny', data.find(e => e[5] == selected))
-
-  // 	// gacka
-  // 	if (typeof ga === 'function') {
-  // 		ga('gtm1.send', 'event', 'vizualizace', 'graf', 'select_obce')
-  // 		}
-  // })
-})
-
-})
-</script>
+<!-- scripts -->
+<script type="text/javascript" src="./vis-global-setup.js"></script>
 <script type="text/javascript" src="./stacked-bar-chart-muzi.js"></script>
 <script type="text/javascript" src="./stacked-bar-chart-zeny.js"></script>
 <script type="text/javascript" src="./stacked-bar-single-sport.js"></script>

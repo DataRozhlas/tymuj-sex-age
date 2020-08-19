@@ -17,3 +17,48 @@
  #sport_sel {
    width: 95%;
  }
+
+ .zdroj-dat a {
+  display: inline-block;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #999999;
+  fill: #999999;
+ }
+
+ .horizontal-layout-container {
+  max-width: 100%;
+  overflow: hidden; 
+  display: block;
+ }
+
+ .subchart-title {
+   position: absolute;
+  text-align: center; 
+  font-size: 0.95rem;
+  z-index: 500;
+  /* left: 10px !important; */
+  font-family: "Asap" !important;
+ }
+
+ #selected-sport-label {
+  margin-top: 27px;
+  text-align: right;
+  font-family: "Asap" !important;
+  color: #666;
+  font-size: 0.85rem;
+ }
+
+.select2-results__option {
+  color: 666 !important;
+  font-family: "Asap" !important;
+  font-size: 0.85rem !important;
+}
+
+.select2-selection__rendered {
+  color: 666 !important;
+  font-family: "Asap" !important;
+  font-size: 0.85rem !important;
+
+}
+/* select2-results__option--selectable */
