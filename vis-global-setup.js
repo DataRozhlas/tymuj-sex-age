@@ -213,7 +213,7 @@ document.getElementById("sport_sel").innerHTML = selCont;
 $(document).ready(function () {
   const sl = $("#sport_sel").select2({
     minimumInputLength: 1,
-    placeholder: "Zkuste třeba cyklistiku",
+    placeholder: "Zkuste třeba cyklistiku nebo nohejbal",
     allowClear: true,
     matcher: mtch,
     width: "95%",
