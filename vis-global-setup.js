@@ -205,14 +205,15 @@ let selCont = `<option></option>`;
 // data.forEach(rec => {
   sex_vek_all.forEach((rec) => {
   // selCont += `<option value="${rec[5]}">${rec[0]} (${rec[1]})</option>`
-  selCont += `<option value="${rec[5]}">${rec.sport_nazev}</option>`;
+  console.log('rec', rec.sport_nazev) // rec[5]
+  selCont += `<option value="${rec.sport_nazev}">${rec.sport_nazev} (${rec.akt_uziv} uživatelů celkem)</option>`;
 });
 document.getElementById("sport_sel").innerHTML = selCont;
 
 $(document).ready(function () {
   const sl = $("#sport_sel").select2({
     minimumInputLength: 1,
-    placeholder: "Zkuste třeba krasobruslení ",
+    placeholder: "Zkuste třeba cyklistiku",
     allowClear: true,
     matcher: mtch,
     width: "95%",
@@ -224,7 +225,8 @@ $(document).ready(function () {
   });
 
   sl.on("change", function (e) {
-    const selected = $("#sport_sel").select2("data")[0].text;
+    console.log("selected", $("#sport_sel").select2("data")[0]);
+    const selected = $("#sport_sel").select2("data")[0].id;
     console.log("selected", selected);
     if (selected !== '') {
     drawSingleSport(selected, "zeny");

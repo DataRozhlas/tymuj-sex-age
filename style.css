@@ -62,4 +62,13 @@
   font-size: 0.85rem !important;
 
 }
+
+.comment {
+  color: #aaa;
+  padding: 0.1rem 0.7rem 0.5rem 0rem;
+  text-align: left !important; 
+  font-size: 0.85rem !important; 
+  left: 10px !important;
+  font-family: "Asap" !important;
+}
 /* select2-results__option--selectable */

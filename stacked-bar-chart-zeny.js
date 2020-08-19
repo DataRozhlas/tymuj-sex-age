@@ -1,8 +1,6 @@
 let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
   chart: {
       type: 'bar',
-      // width: singlePlotWidth, 
-      // height: 800, // comment out if not necessary
       events: {
         load() {
           fixOffset(this);
@@ -25,7 +23,6 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
         formatter: function() {
             return this.value + ' %'
         },
-        // overflow: 'allow',
         align: 'right',
         // style: {
         //   textAlign: right
@@ -59,8 +56,8 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
       let currSportObject = sex_vek.filter(a => a.sport_nazev === this.x)
 
       s += 'Aktivní uživatelé celkem: <b>' + currSportObject[0].akt_uziv + '</b><br>'
-      s += '<span style="color:#28377E"><b>Muži: ' + currSportObject[0].muzi_total + ' %</b></span> '
-        + '| <span style="color:#BB1B30"><b>Źeny: ' + currSportObject[0].zeny_total + ' %</b></span><br>'
+      s += '<span style="color:#008AB8"><b>Muži: ' + currSportObject[0].muzi_total + ' %</b></span> '
+        + '| <span style="color:#E63946"><b>Źeny: ' + currSportObject[0].zeny_total + ' %</b></span><br>'
 
       $.each(this.points, function(i, point) {
           s += '<br/><span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' + point.y + ' %</b>';
@@ -113,7 +110,7 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
       color: colors_gender_seq['zeny-2']
     },
     {
-      name: 'Pod 20 let',
+      name: 'pod 20 let',
       data : sex_vek.map(a => a.zeny_pod_20),
       color: colors_gender_seq['zeny-1']
     },

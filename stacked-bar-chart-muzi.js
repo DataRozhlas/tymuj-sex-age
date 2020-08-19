@@ -1,9 +1,7 @@
 let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   chart: {
       type: 'bar',
-      // width: visContainerWidth/2, 
       height: 350, // comment out if not necessary
-      
       events: {
         load() {
           setSamePlotSize(this);
@@ -11,23 +9,10 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
       },
   },
   title: false,
-  // {
-  //     text: 'Stacked Bar Chart Multiple Categories', 
-  //     useHTML: true,
-  // },
   subtitle: false,
-  //  {
-  //     useHTML: true,
-  //     text: 'Většina Čechů říká, že třídí odpadky, omezit konzumaci masa se ale chce jen málokomu' + '<br><span style="color: #fff">.</span>'
-  // },
   credits: false,
-  //  {
-  //   href : '',
-  //   text : 'Zdroj: třeba doplnit'
-  // },
   xAxis: {
       categories:  sex_vek.map(a => a.sport_nazev), 
-      // categories: ['třídím odpadky', 'šetřím vodou (sprchování, mytí nádobí..)', 'omezuji igelitky', 'vyhýbám se nadbytečným obalům', 'kupuji lokální potraviny', 'nosím si vlastní láhev na vodu', 'celkově omezuji spotřebu', 'nekupuji balenou vodu', 'nakupuji věci z druhé ruky', 'jezdím MHD místo autem', 'nelétám letadlem', 'používám přírodní kosmetiku', 'vzdělávám se o ekologii', 'podepisuji petice', 'snižuji konzumaci masa', 'chodím na demonstrace za klima']
   },
   yAxis: {
       title: false,
@@ -41,19 +26,30 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
             return this.value + ' %'
         } 
       },
-      // stackLabels: {
-      //   enabled: true,
-      //   style: {
-      //     color: 'gray',
-      //     fontWeight: 'regular'
-      //   },
-      //   format: '{total} %'
-      // }
       tickInterval: 50
-  }, 
+  },
   tooltip: {
     valueSuffix: ' %',
-    shared: true
+    shared: true,
+    backgroundColor: '#fffe',
+    useHTML: true,
+    formatter: function() {
+      var s = '<span style="font-size: 0.9rem"><b>'+ this.x +'</b></span><br>';
+
+      console.log(this, this.x)
+      console.log(sex_vek.filter(a => a.sport_nazev === this.x))
+      let currSportObject = sex_vek.filter(a => a.sport_nazev === this.x)
+
+      s += 'Aktivní uživatelé celkem: <b>' + currSportObject[0].akt_uziv + '</b><br>'
+      s += '<span style="color:#008AB8"><b>Muži: ' + currSportObject[0].muzi_total + ' %</b></span> '
+        + '| <span style="color:#E63946"><b>Źeny: ' + currSportObject[0].zeny_total + ' %</b></span><br>'
+
+      $.each(this.points, function(i, point) {
+          s += '<br/><span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' + point.y + ' %</b>';
+      });
+
+      return s;
+  },
   },
   exporting: {
       enabled: false
@@ -97,7 +93,7 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
     color: colors_gender_seq['muzi-2']
   },
   {
-    name: 'Pod 20 let',
+    name: 'pod 20 let',
     data : sex_vek.map(a => a.muzi_pod_20),
     color: colors_gender_seq['muzi-1']
   },

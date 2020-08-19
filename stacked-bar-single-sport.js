@@ -6,7 +6,7 @@ let drawSingleSport = function(selected_sport, category) {
     chart: {
         type: 'bar',
         // width: singlePlotWidth, 
-        height: 100, // comment out if not necessary
+        height: 110, // comment out if not necessary
         events: {
           load() {
             fixOffset(this, 'single');
@@ -14,23 +14,10 @@ let drawSingleSport = function(selected_sport, category) {
         },
     },
     title: false,
-    // title: {
-    //     text: selected_sport,
-    //     useHTML: true,
-    // },
     subtitle: false,
-    // {
-    //     useHTML: true,
-    //     text: 'Většina Čechů říká, že třídí '
-    // },
     credits: false,
-    // {
-    //   href : '',
-    //   text : 'Zdroj: třeba doplnit'
-    // },
     xAxis: {
       visible: false,
-      // visible: category === 'zeny' ? false : true,
         categories: [ selected_sport ]
     },
     yAxis: {
@@ -40,11 +27,13 @@ let drawSingleSport = function(selected_sport, category) {
           formatter: function() {
               return this.value + '%'
           } 
-        }
+        },
+        tickInterval: 50
     }, 
     tooltip: {
       valueSuffix: ' %',
       shared: true,
+      backgroundColor: '#fffe',
       useHTML: true,
       formatter: function() {
         var s = '<span style="font-size: 0.9rem"><b>'+ this.x +'</b></span><br>';
@@ -53,9 +42,9 @@ let drawSingleSport = function(selected_sport, category) {
         console.log(sex_vek_all.filter(a => a.sport_nazev === this.x))
         let currSportObject = sex_vek_all.filter(a => a.sport_nazev === this.x)
   
-        s += 'Aktivní uživatelé celkem: <b>' + currSportObject[0].akt_uziv + '</b><br>'
-        s += '<span style="color:#28377E"><b>Muži: ' + currSportObject[0].muzi_total + ' %</b></span> '
-          + '| <span style="color:#BB1B30"><b>Źeny: ' + currSportObject[0].zeny_total + ' %</b></span><br>'
+        // s += 'Aktivní uživatelé celkem: <b>' + currSportObject[0].akt_uziv + '</b><br>'
+        s += '<span style="color:#008AB8"><b>Muži: ' + currSportObject[0].muzi_total + ' %</b></span> '
+          + '| <span style="color:#E63946"><b>Źeny: ' + currSportObject[0].zeny_total + ' %</b></span>'
   
         $.each(this.points, function(i, point) {
             s += '<br/><span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' + point.y + ' %</b>';
@@ -69,9 +58,6 @@ let drawSingleSport = function(selected_sport, category) {
     },
     legend: {
       enabled: false,
-      // reversed: true,
-      layout: 'vertical',
-      // floating: true
     },
     plotOptions: {
         bar: {
@@ -89,27 +75,27 @@ let drawSingleSport = function(selected_sport, category) {
     },
     series: [
       {
-        name: '50 a vic',
+        name: '50 let a více',
         data : sex_vek_all.filter(a => a.sport_nazev === selected_sport).map(a => a[category + '_nad_50']),
         color: colors_gender_seq[category + '-5']
       },
       {
-        name: '40-49',
+        name: '40-49 let',
         data : sex_vek_all.filter(a => a.sport_nazev === selected_sport).map(a => a[category + '_40_49']),
         color: colors_gender_seq[category + '-4']
       },
       {
-        name: '30-39',
+        name: '30-39 let',
         data : sex_vek_all.filter(a => a.sport_nazev === selected_sport).map(a => a[category + '_30_39']),
         color: colors_gender_seq[category + '-3']
       },
       {
-        name: '20-29',
+        name: '20-29 let',
         data : sex_vek_all.filter(a => a.sport_nazev === selected_sport).map(a => a[category + '_20_29']),
         color: colors_gender_seq[category + '-2']
       },
       {
-        name: 'Pod 20',
+        name: 'pod 20 let',
         data : sex_vek_all.filter(a => a.sport_nazev === selected_sport).map(a => a[category + '_pod_20']),
         color: colors_gender_seq[category + '-1']
       },
