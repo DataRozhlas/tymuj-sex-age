@@ -36,15 +36,15 @@ let drawSingleSport = function(selected_sport, category) {
       backgroundColor: '#fffe',
       useHTML: true,
       formatter: function() {
-        var s = '<span style="font-size: 0.9rem"><b>'+ this.x +'</b></span><br>';
-  
+        // var s = '<span style="font-size: 0.9rem"><b>'+ this.x +'</b></span><br>';
+        var s = ''
         console.log(this, this.x)
         console.log(sex_vek_all.filter(a => a.sport_nazev === this.x))
         let currSportObject = sex_vek_all.filter(a => a.sport_nazev === this.x)
   
         // s += 'Aktivní uživatelé celkem: <b>' + currSportObject[0].akt_uziv + '</b><br>'
         s += '<span style="color:#008AB8"><b>Muži: ' + currSportObject[0].muzi_total + ' %</b></span> '
-          + '| <span style="color:#E63946"><b>Źeny: ' + currSportObject[0].zeny_total + ' %</b></span>'
+          + '| <span style="color:#E63946"><b>Ženy: ' + currSportObject[0].zeny_total + ' %</b></span>'
   
         $.each(this.points, function(i, point) {
             s += '<br/><span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' + point.y + ' %</b>';

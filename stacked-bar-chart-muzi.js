@@ -42,7 +42,7 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
 
       s += 'Aktivní uživatelé celkem: <b>' + currSportObject[0].akt_uziv + '</b><br>'
       s += '<span style="color:#008AB8"><b>Muži: ' + currSportObject[0].muzi_total + ' %</b></span> '
-        + '| <span style="color:#E63946"><b>Źeny: ' + currSportObject[0].zeny_total + ' %</b></span><br>'
+        + '| <span style="color:#E63946"><b>Ženy: ' + currSportObject[0].zeny_total + ' %</b></span><br>'
 
       $.each(this.points, function(i, point) {
           s += '<br/><span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' + point.y + ' %</b>';
@@ -73,7 +73,7 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   },
   series: [
   {
-    name: '50 a vic let',
+    name: '50 let a více',
     data : sex_vek.map(a => a.muzi_nad_50),
       color: colors_gender_seq['muzi-5']
   },

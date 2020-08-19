@@ -57,7 +57,7 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
 
       s += 'Aktivní uživatelé celkem: <b>' + currSportObject[0].akt_uziv + '</b><br>'
       s += '<span style="color:#008AB8"><b>Muži: ' + currSportObject[0].muzi_total + ' %</b></span> '
-        + '| <span style="color:#E63946"><b>Źeny: ' + currSportObject[0].zeny_total + ' %</b></span><br>'
+        + '| <span style="color:#E63946"><b>Ženy: ' + currSportObject[0].zeny_total + ' %</b></span><br>'
 
       $.each(this.points, function(i, point) {
           s += '<br/><span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' + point.y + ' %</b>';
