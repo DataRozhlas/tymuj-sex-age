@@ -51,15 +51,18 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
       // showFirstLabel: false,
       labels: {
         formatter: function() {
-        //   if (this.isLast) {
-        //     return this.value + '<br>' +
-        //                 '<span class="light-gray-text">jízd za</span>' + '<br>' +
-        //                 '<span class="light-gray-text">návěstidla</span>'
-        //   } else {
-            return this.value + '%'
-        //   }
+            return this.value + ' %'
         } 
-      }
+      },
+      // stackLabels: {
+      //   enabled: true,
+      //   style: {
+      //     color: 'gray',
+      //     fontWeight: 'regular'
+      //   },
+      //   format: '{total} %'
+      // }
+      tickInterval: 50
   }, 
   tooltip: {
     valueSuffix: ' %',

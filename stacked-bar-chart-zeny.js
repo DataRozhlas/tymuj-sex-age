@@ -21,9 +21,26 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
       max: 100, 
       labels: {
         formatter: function() {
-            return this.value + '%'
-        } 
-      }
+            return this.value + ' %'
+        },
+        // overflow: 'allow',
+        align: 'right',
+        // style: {
+        //   textAlign: right
+        // }
+        // rotation: 0,
+      },
+      // showFirstLabel: false, 
+      align: 'right',
+      // stackLabels: {
+      //   enabled: true,
+      //   style: {
+      //     color: 'gray',
+      //     fontWeight: 'regular'
+      //   },
+      //   format: '{total} %'
+      // },
+      tickInterval: 50
   }, 
   tooltip: {
     valueSuffix: ' %',
@@ -35,6 +52,7 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
   legend: {
     reversed: true,
     layout: 'vertical',
+
   },
   plotOptions: {
       bar: {
