@@ -17,7 +17,9 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
       categories:  sex_vek.map(a => a.sport_nazev), 
   },
   yAxis: {
-      title: false,
+      title: {
+        text: 'všichni hráči sportu'
+      },
       max: 100, 
       labels: {
         formatter: function() {
@@ -69,51 +71,29 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
   },
   series: [
     {
-      name: '50 a vic',
+      name: '50 let a více',
       data : sex_vek.map(a => a.zeny_nad_50),
       color: colors['zeny-5']
     },
     {
-      name: '40-49',
+      name: '40-49 let',
       data : sex_vek.map(a => a.zeny_40_49),
       color: colors['zeny-4']
     },
     {
-      name: '30-39',
+      name: '30-39 let',
       data : sex_vek.map(a => a.zeny_30_39),
       color: colors['zeny-3']
     },
     {
-      name: '20-29',
+      name: '20-29 let',
       data : sex_vek.map(a => a.zeny_20_29),
       color: colors['zeny-2']
     },
     {
-      name: 'Pod 20',
+      name: 'Pod 20 let',
       data : sex_vek.map(a => a.zeny_pod_20),
       color: colors['zeny-1']
     },
 ]
 });
-
-// let axis_width = axisWidth.item(0).getBoundingClientRect().width
-// console.log(axis_width, chartWidth, chartWidth.item(0).width.baseVal.value)
-// let chart_width = document.getElementById("vis-stacked-bar-muzi").offsetWidth
-// let plot_width = (2 * chartWidth - axis_width) / 2
-
-// document.getElementById('vis-stacked-bar-muzi').setAttribute('style', 'max-width: 500px; height: 500px') // .setAttribute('style', 'height: 500px')
-// document.getElementById('vis-stacked-bar-zeny').setAttribute('style', 'max-width: 200px') //.setAttribute('style', 'height: 500px')
-// muzi_chart.update({
-//   chart: {
-//     // height: 900,
-//     width: 500, // plot_width + axis_width
-//   }
-// })
-
-// zeny_chart.update({
-//   chart: {
-//     // x: 500,
-//     width: 400,
-//     height: 500
-//   }
-// })

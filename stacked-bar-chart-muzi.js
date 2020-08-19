@@ -1,21 +1,8 @@
-let axisWidth =
-  document.getElementById("vis-stacked-bar-muzi").getElementsByClassName('highcharts-xaxis-labels') // > 600
-let chartWidth =
-  document.getElementById("vis-stacked-bar-muzi").getElementsByClassName('highcharts-plot-background') // > 600
-    // ? 600
-    // : document.getElementById("vis-stacked-bar-muzis").offsetWidth;
-// let chartWidth =
-//   document.getElementById("vis-stacked-bar-muzi").getElementsByClassName('').offsetWidth > 600
-//     ? 600
-//     : document.getElementById("vis-stacked-bar-muzis").offsetWidth;
-
-console.log(axisWidth, chartWidth, chartWidth.item(0))
-
 let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   chart: {
       type: 'bar',
       // width: visContainerWidth/2, 
-      height: 600, // comment out if not necessary
+      height: 350, // comment out if not necessary
       
       events: {
         load() {
@@ -44,9 +31,9 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   },
   yAxis: {
       title: false,
-      // title: {
-      //     text: 'nepovolené jízdy za návěstidla'
-      // },
+      title: {
+          text: 'všichni hráči sportu'
+      },
       max: 100, 
       // showFirstLabel: false,
       labels: {
@@ -90,25 +77,25 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   },
   series: [
   {
-    name: '50 a vic',
+    name: '50 a vic let',
     data : sex_vek.map(a => a.muzi_nad_50),
       color: colors['muzi-5']
       // color: colors['2020']
   },
   {
-    name: '40-49',
+    name: '40-49 let',
     data : sex_vek.map(a => a.muzi_40_49),
       color: colors['muzi-4']
       // color: colors['2020']
   },
   {
-    name: '30-39',
+    name: '30-39 let',
     data : sex_vek.map(a => a.muzi_30_39),
       color: colors['muzi-3']
       // color: colors['2020']
   },
   {
-    name: '20-29',
+    name: '20-29 let',
     data : sex_vek.map(a => a.muzi_20_29),
     color: colors['muzi-2']
 
@@ -116,7 +103,7 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
     
   },
   {
-    name: 'Pod 20',
+    name: 'Pod 20 let',
     data : sex_vek.map(a => a.muzi_pod_20),
     color: colors['muzi-1']
 
