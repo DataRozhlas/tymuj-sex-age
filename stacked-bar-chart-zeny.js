@@ -46,7 +46,29 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
   }, 
   tooltip: {
     valueSuffix: ' %',
-    shared: true
+    shared: true,
+    backgroundColor: '#fffe',
+    style: {
+    },
+    useHTML: true,
+    formatter: function() {
+      var s = '<span style="font-size: 0.9rem"><b>'+ this.x +'</b></span><br>';
+
+      console.log(this, this.x)
+      console.log(sex_vek.filter(a => a.sport_nazev === this.x))
+      let currSportObject = sex_vek.filter(a => a.sport_nazev === this.x)
+
+      s += 'Aktivní uživatelé celkem: <b>' + currSportObject[0].akt_uziv + '</b><br>'
+      s += '<span style="color:#28377E"><b>Muži: ' + currSportObject[0].muzi_total + ' %</b></span> '
+        + '| <span style="color:#BB1B30"><b>Źeny: ' + currSportObject[0].zeny_total + ' %</b></span><br>'
+
+      $.each(this.points, function(i, point) {
+          s += '<br/><span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' + point.y + ' %</b>';
+      });
+
+      return s;
+  },
+  shared: true
   },
   exporting: {
       enabled: false
@@ -73,27 +95,27 @@ let zeny_chart = Highcharts.chart('vis-stacked-bar-zeny', {
     {
       name: '50 let a více',
       data : sex_vek.map(a => a.zeny_nad_50),
-      color: colors['zeny-5']
+      color: colors_gender_seq['zeny-5']
     },
     {
       name: '40-49 let',
       data : sex_vek.map(a => a.zeny_40_49),
-      color: colors['zeny-4']
+      color: colors_gender_seq['zeny-4']
     },
     {
       name: '30-39 let',
       data : sex_vek.map(a => a.zeny_30_39),
-      color: colors['zeny-3']
+      color: colors_gender_seq['zeny-3']
     },
     {
       name: '20-29 let',
       data : sex_vek.map(a => a.zeny_20_29),
-      color: colors['zeny-2']
+      color: colors_gender_seq['zeny-2']
     },
     {
       name: 'Pod 20 let',
       data : sex_vek.map(a => a.zeny_pod_20),
-      color: colors['zeny-1']
+      color: colors_gender_seq['zeny-1']
     },
 ]
 });

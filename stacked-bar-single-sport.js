@@ -45,7 +45,24 @@ let drawSingleSport = function(selected_sport, category) {
     tooltip: {
       valueSuffix: ' %',
       shared: true,
-      reversed: true
+      useHTML: true,
+      formatter: function() {
+        var s = '<span style="font-size: 0.9rem"><b>'+ this.x +'</b></span><br>';
+  
+        console.log(this, this.x)
+        console.log(sex_vek_all.filter(a => a.sport_nazev === this.x))
+        let currSportObject = sex_vek_all.filter(a => a.sport_nazev === this.x)
+  
+        s += 'Aktivní uživatelé celkem: <b>' + currSportObject[0].akt_uziv + '</b><br>'
+        s += '<span style="color:#28377E"><b>Muži: ' + currSportObject[0].muzi_total + ' %</b></span> '
+          + '| <span style="color:#BB1B30"><b>Źeny: ' + currSportObject[0].zeny_total + ' %</b></span><br>'
+  
+        $.each(this.points, function(i, point) {
+            s += '<br/><span style="color:' + point.color + '">\u25CF</span> ' + point.series.name + ': <b>' + point.y + ' %</b>';
+        });
+  
+        return s;
+      }
     },
     exporting: {
         enabled: false
@@ -74,27 +91,27 @@ let drawSingleSport = function(selected_sport, category) {
       {
         name: '50 a vic',
         data : sex_vek_all.filter(a => a.sport_nazev === selected_sport).map(a => a[category + '_nad_50']),
-        color: colors[category + '-5']
+        color: colors_gender_seq[category + '-5']
       },
       {
         name: '40-49',
         data : sex_vek_all.filter(a => a.sport_nazev === selected_sport).map(a => a[category + '_40_49']),
-        color: colors[category + '-4']
+        color: colors_gender_seq[category + '-4']
       },
       {
         name: '30-39',
         data : sex_vek_all.filter(a => a.sport_nazev === selected_sport).map(a => a[category + '_30_39']),
-        color: colors[category + '-3']
+        color: colors_gender_seq[category + '-3']
       },
       {
         name: '20-29',
         data : sex_vek_all.filter(a => a.sport_nazev === selected_sport).map(a => a[category + '_20_29']),
-        color: colors[category + '-2']
+        color: colors_gender_seq[category + '-2']
       },
       {
         name: 'Pod 20',
         data : sex_vek_all.filter(a => a.sport_nazev === selected_sport).map(a => a[category + '_pod_20']),
-        color: colors[category + '-1']
+        color: colors_gender_seq[category + '-1']
       },
   ]
   });

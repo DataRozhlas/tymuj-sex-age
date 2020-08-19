@@ -1,11 +1,5 @@
-var colors = {
+var colors_gender_seq = {
   default: "#aaa",
-  "2020": "#e63946",
-  "2018": "#009FB8",
-  "2019": "#3E80B6",
-  avg: "#e63946",
-  avg: "#333",
-  "uhrn-highlight": "#30638e",
   "muzi-1": "#28377E",
   "muzi-2": "#008AB8",
   "muzi-3": "#2DB59E",

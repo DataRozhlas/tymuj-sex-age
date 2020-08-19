@@ -79,35 +79,27 @@ let muzi_chart = Highcharts.chart('vis-stacked-bar-muzi', {
   {
     name: '50 a vic let',
     data : sex_vek.map(a => a.muzi_nad_50),
-      color: colors['muzi-5']
-      // color: colors['2020']
+      color: colors_gender_seq['muzi-5']
   },
   {
     name: '40-49 let',
     data : sex_vek.map(a => a.muzi_40_49),
-      color: colors['muzi-4']
-      // color: colors['2020']
+      color: colors_gender_seq['muzi-4']
   },
   {
     name: '30-39 let',
     data : sex_vek.map(a => a.muzi_30_39),
-      color: colors['muzi-3']
-      // color: colors['2020']
+      color: colors_gender_seq['muzi-3']
   },
   {
     name: '20-29 let',
     data : sex_vek.map(a => a.muzi_20_29),
-    color: colors['muzi-2']
-
-    // color: colors['2019']
-    
+    color: colors_gender_seq['muzi-2']
   },
   {
     name: 'Pod 20 let',
     data : sex_vek.map(a => a.muzi_pod_20),
-    color: colors['muzi-1']
-
-    // color: colors['2018']
+    color: colors_gender_seq['muzi-1']
   },
 ]
 });
