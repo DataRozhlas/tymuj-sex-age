@@ -8,7 +8,7 @@ Highcharts.chart('vis-column-chart-simple', {
     width: chartWidthColumn,
   },
   title: {
-    text: 'Nejpopulárnější amatérské sporty',
+    text: 'Nejpopulárnější sporty dle Týmuj.cz',
     useHTML: true,
   },
   subtitle: {
@@ -69,7 +69,7 @@ Highcharts.chart('vis-column-multiple-categories', {
     width: chartWidthStacked,
   },
   title: {
-    text: 'Amatérské sporty v největších městech',
+    text: 'Sporty v největších městech dle Týmuj.cz',
     useHTML: true,
   },
   subtitle: {
