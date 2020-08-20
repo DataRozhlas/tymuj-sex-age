@@ -14,6 +14,17 @@ var colors_gender_seq = {
   "zeny-7": "#FCF6B4",
 };
 
+var colors = {
+  'default': '#aaa',
+  'fotbal': '#E64552', //E63946 43AA8B
+  'volejbal': '#993C82', //1d3557 E64552
+  'florbal': '#4B4B8F', //defcf6
+  'hokej': '#009CB8', //a8dadc
+  'basketbal': '#F9C74F', //457b9d
+  'sport': '#4B4B8F', //457b9d
+  'ostatni': '#C9C9C9' //333
+}
+
 Highcharts.setOptions({
   lang: {
     months: [
