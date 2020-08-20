@@ -3,6 +3,15 @@
   margin: 1em auto;
 }*/
 
+.sport {
+  fill: #457b9d;
+  font-weight: bold;
+}
+
+.mesto {
+  font-weight: bold;
+}
+
 .small {
   /* max-width: 350px; */
   /* min-width: 300px; */
